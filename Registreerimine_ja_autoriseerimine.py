@@ -1,5 +1,6 @@
 from tkinter import *
 from random import *
+import os
 import string
 k=0
 
@@ -11,10 +12,10 @@ def zv(event):
     else:
         password.configure(show="")
 
-def spisok(f):
+def spisok():
     log_pas={}
     pas_log={}
-    file=open(f,'r',encoding="utf-8-sig")
+    file=open("log_pas.txt",'r',encoding="utf-8-sig")
     for line in file:
         k,v=line.strip().split("-")
         log_pas[v]=k
@@ -31,6 +32,7 @@ def pswrd(event):
         sala+=choice(t_num)
     password.delete(0, END)
     password.insert(0,sala)
+
 
 def mut():
     lines=[]
@@ -117,8 +119,105 @@ def muutmine2(x):
     entnn.pack()
     btnv.pack()
     muuta.mainloop()
+>>>>>>> 05a9a3a01877a30a7385a14177aa62d318494178
 
 
+#def mut():
+#    lines=[]
+#    with open("log_pas.txt",'r') as fp:
+#        lines=fp.readline()
+#    with open("log_pas.txt",'w') as fp:
+#        for line in enumerate(lines):
+#            fp.write(line)
+
+#def mut(l1,lu):
+#    with open("log_pas.txt", encoding="utf-8-sig") as infile, open("text.txt", "w", encoding="utf-8-sig") as outfile:
+#        for line in infile:
+#            if l1 not in line:
+#                outfile.write(line)
+#        outfile.write("\n"+lu+"-"+p1)
+#    os.remove("log_pas.txt")
+#    os.rename("text.txt", "log_pas.txt")
+
+
+
+def salvesta(event):
+        l=reg_log.get()
+        p=reg_pas.get()
+        f=open("log_pas.txt",'a',encoding="utf-8-sig")
+        f.write("\n"+l+"-"+p)
+        register.destroy()
+
+
+def registratsia(event):
+    global reg_log,reg_pas,register
+    register=Toplevel()
+    register.iconbitmap("kot.ico")
+    register.geometry("450x350")
+    register.title("Registreerimine")
+    register["bg"] = "Gainsboro"
+    reg_log=Entry(register, fg="blue",bg="lightblue",font="Arial 20",justify=CENTER,width=10)
+    login=Label(register,text="Login",font="Arial 20",bg="Gainsboro")
+    password=Label(register,text="Password",font="Arial 20",bg="Gainsboro")
+    reg_pas=Entry(register,fg="blue",bg="lightblue",font="Arial 20",justify=CENTER,width=10)
+    lbr=Label(register,text="Registreerimine",bg="pink",fg="#AA4A44",font="Arial 20",width=28)
+    entr=Button(register,text="Enter", font="Arial 24", relief=GROOVE, width=11)
+    r=Button(register,text="Genereeritud parool",font="Arial 10",relief=GROOVE, width=15)
+
+    entr.bind("<Button-1>",salvesta)
+    r.bind("<Button-1>",pswrd)
+ 
+    lbr.pack()
+    login.pack()
+    reg_log.pack()
+    password.pack()
+    reg_pas.pack()
+    r.pack()
+    entr.pack()
+    
+    register.mainloop()
+
+
+
+def muutmine1(y):
+    muuta=Toplevel()
+    muuta.geometry("450x350")
+    muuta.iconbitmap("kot.ico")
+    muuta.title("Muuda parool") 
+    lblt=Label(muuta,text="Autoriseerimine",bg="pink",fg="#AA4A44",font="Arial 20",width=28)
+    lbln=Label(muuta,text="Parool",font="Arial 20")
+    entn=Entry(muuta,fg="blue",bg="lightblue",font="Arial 20",justify=CENTER,width=10)
+    lblnn=Label(muuta,text="Uus parool",font="Arial 20")
+    entnn=Entry(muuta,fg="blue",bg="lightblue",font="Arial 20",justify=CENTER,width=10)
+    l1=entn.get()
+    lu=entnn.get()
+    btnv=Button(muuta,text="Muuda",font="Arial 20",relief=GROOVE,command=mut(l1,lu))
+    lblt.pack()
+    lbln.pack()
+    entn.pack()
+    lblnn.pack()
+    entnn.pack()
+    btnv.pack()
+    muuta.mainloop()
+
+def muutmine2(x):
+    muuta=Toplevel()
+    muuta.geometry("450x350")
+    muuta.iconbitmap("kot.ico")
+    muuta.title("Muuda login") 
+    lblt=Label(muuta,text="Muuda login",bg="pink",fg="#AA4A44",font="Arial 20",width=28)
+    lbln=Label(muuta,text="Login",font="Arial 20")
+    entn=Entry(muuta,fg="blue",bg="lightblue",font="Arial 20",justify=CENTER,width=10)
+    lblnn=Label(muuta,text="Uus login",font="Arial 20")
+    entnn=Entry(muuta,fg="blue",bg="lightblue",font="Arial 20",justify=CENTER,width=10)
+    btnv=Button(muuta,text="Muuda",font="Arial 20",relief=GROOVE) 
+    lblt.pack()
+    lbln.pack()
+    entn.pack()
+    lblnn.pack()
+    entnn.pack()
+    btnv.pack()
+    muuta.mainloop()
 
 
 def proverka(event):
@@ -161,7 +260,11 @@ def proverka(event):
     else:
         incor.configure(text="Vale login",bg="#F08080")
 
+<<<<<<< HEAD
+log_pas,pas_log=spisok()
+=======
 log_pas,pas_log=spisok("log_pas.txt")
+>>>>>>> 05a9a3a01877a30a7385a14177aa62d318494178
 aken=Tk()
 aken.title("Autoriseerimine")
 aken.geometry("450x350")
